@@ -49,7 +49,7 @@ function arabicAuthorsCount(authors) {
     return beginsWithA.length;
   }
 
-  function nameBeginsWithK(authors) {
+  function nameBeginsWithK(array, letter) {
     var beginsWithK = authors.filter(function(author){
       var kNames = author.name.indexOf('K') === 0;
       return kNames;
