@@ -42,66 +42,56 @@ function arabicAuthorsCount(authors) {
   }
 
   function nameBeginsWithA(authors) {
-    var filteredAuthors = [];
-    for (var author of authors) {
-      if (author.name.indexOf("A") === 0) {
-        filteredAuthors.push(author);
-      }
-    }
-    return filteredAuthors.length;
+    var beginsWithA = authors.filter(function(author){
+      var firstNameA = author.name.indexOf('A') === 0;
+      return firstNameA;
+    });
+    return beginsWithA.length;
   }
 
   function nameBeginsWithK(authors) {
-    var filteredAuthors = [];
-    for (var author of authors) {
-      if (author.name.indexOf('K') === 0) {
-        filteredAuthors.push(author);
-      }
-    }
-    return filteredAuthors.length;
+    var beginsWithK = authors.filter(function(author){
+      var kNames = author.name.indexOf('K') === 0;
+      return kNames;
+    });
+    return beginsWithK.length;
   }
+
 
   function avgPublishedWorks(authors) {
     var sum = 0;
-    for (var idx = 0; idx < authors.length; idx++) {
-      var author = authors[idx];
+    authors.forEach(function(author, i) {
       sum += author.publishedWorks;
-    }
+    })
     var avg = sum/authors.length;
     avg = Math.round(avg);
     return avg;
   }
 
   function avgPublishedWorksByEnglish(authors) {
-    var filteredList = [];
-    for (var idx = 0; idx < authors.length; idx++) {
-      var author = authors[idx];
-      if (author.language === "English") {
-        filteredList.push(author);
-      }
+    var isEnglish = function(author) {
+      return author.language === "English";
     }
+    var englishAuthors = authors.filter(isEnglish);
     var sum = 0;
-    for (var x of filteredList) {
-      sum += x.publishedWorks;
-    }
-    var avg = sum/filteredList.length;
+    englishAuthors.forEach(function(val, i) {
+      sum += englishAuthors[i].publishedWorks;
+    });
+    var avg = sum/englishAuthors.length;
     avg = Math.floor(avg);
     return avg;
   }
 
   function avgPublishedWorksInJapanese(author) {
-    var filteredList = [];
-    for (var idx = 0; idx < authors.length; idx++) {
-      var author = authors[idx];
-      if (author.language === "Japanese") {
-      filteredList.push(author);
-      }
+    var isJapanese = function(author) {
+      return author.language === "Japanese";
     }
-      var sum = 0;
-      for (var author of filteredList) {
-      sum += author.publishedWorks;
-      }
-    var avg = sum/filteredList.length;
+    var japaneseAuthors = authors.filter(isJapanese);
+    var sum = 0;
+    japaneseAuthors.forEach(function(val, i) {
+      sum += japaneseAuthors[i].publishedWorks;
+    });
+    var avg = sum/japaneseAuthors.length;
     avg = Math.floor(avg);
     return avg;
   }
